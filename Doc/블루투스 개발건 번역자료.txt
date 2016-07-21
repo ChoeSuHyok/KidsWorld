@@ -1,0 +1,16 @@
+蓝牙发码规则(블루투스 데이터 헤더부)
+
+数据(데이터): 10101110  xxxxxxxx   xxxxxxxx   xxxxxxxx   xxxxxxxx   11101010
+	            byte1	 byte2 	      byte3         byte4	 byte5	      byte6
+
+说明(설명): 
+	byte1: 10101110 : 초기값(고정)
+	byte2: 데이터 첫 블록
+	byte3: 데이터 두번째 블록
+	byte4: 데이터 세번째 블록(만일 데이터가 2바이트밖에 없다면 1번쨰 바이트는 0으로 채워진다)
+	byte5: CheckSum마당
+	byte6: 11101010:마지막값(고정)
+
+	CheckSum 규칙: byte5 + byte4 + byte3 + byte2 = 0 이여야 한다.
+
+
