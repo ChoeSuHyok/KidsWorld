@@ -91,6 +91,27 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        mHandler = new Handler();
+
+//        CheckBle();
+
+        LoadLayout();
+    }
+
+    private void CheckBle() {
+
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            // Device does not support Bluetooth
+        } else {
+            if (!mBluetoothAdapter.isEnabled()) {
+                // Bluetooth is not enable :)
+            }
+        }
+    }
+
+    private void LoadLayout() {
+
         ui_lsvDevices = (ListView) findViewById(R.id.lsv_main_devices);
 
         ui_lsvDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -112,9 +133,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        getSupportActionBar().setTitle(R.string.title_devices);
+        // Initializes list view adapter.
+        mLeDeviceListAdapter = new LeDeviceListAdapter();
+        ui_lsvDevices.setAdapter(mLeDeviceListAdapter);
 
-        mHandler = new Handler();
+        getSupportActionBar().setTitle(R.string.title_devices);
     }
 
     @Override
@@ -149,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         registerReceiver(mBleReceiver, BleService.getIntentFilter());
 
+        scanLeDevice(true);
+
         // Ensures Bluetooth is enabled on the device. If Bluetooth is not
         // currently enabled,
         // fire an intent to display a dialog asking the user to grant
@@ -158,11 +183,6 @@ public class MainActivity extends AppCompatActivity {
                     BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
-
-        // Initializes list view adapter.
-        mLeDeviceListAdapter = new LeDeviceListAdapter();
-        ui_lsvDevices.setAdapter(mLeDeviceListAdapter);
-        scanLeDevice(true);
     }
 
     @Override

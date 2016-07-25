@@ -19,7 +19,7 @@
  * use, installation, modification or redistribution of this XPG software
  * constitutes acceptance of these terms.� If you do not agree with these terms,
  * please do not use, install, modify or redistribute this XPG software.
- * <p>
+ * <p/>
  * In consideration of your agreement to abide by the following terms, and
  * subject to these terms, XPG grants you a non-exclusive license, under XPG's
  * copyrights in this original XPG software (the "XPG Software"), to use and
@@ -33,13 +33,13 @@
  * express or implied, are granted by XPG herein, including but not limited to
  * any patent rights that may be infringed by your derivative works or by other
  * works in which the XPG Software may be incorporated.
- * <p>
+ * <p/>
  * The XPG Software is provided by XPG on an "AS IS" basis.� XPG MAKES NO
  * WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED
  * WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR
  * PURPOSE, REGARDING THE XPG SOFTWARE OR ITS USE AND OPERATION ALONE OR IN
  * COMBINATION WITH YOUR PRODUCTS.
- * <p>
+ * <p/>
  * IN NO EVENT SHALL XPG BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL OR
  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
  * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -47,7 +47,7 @@
  * AND/OR DISTRIBUTION OF THE XPG SOFTWARE, HOWEVER CAUSED AND WHETHER UNDER
  * THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR
  * OTHERWISE, EVEN IF XPG HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * <p>
+ * <p/>
  * ABOUT XPG: Established since June 2005, Xtreme Programming Group, Inc. (XPG)
  * is a digital solutions company based in the United States and China. XPG
  * integrates cutting-edge hardware designs, mobile applications, and cloud
@@ -55,7 +55,7 @@
  * partners and customers include global leading corporations in semiconductor,
  * home appliances, health/wellness electronics, toys and games, and automotive
  * industries. Visit www.xtremeprog.com for more information.
- * <p>
+ * <p/>
  * Copyright (C) 2013 Xtreme Programming Group, Inc. All Rights Reserved.
  */
 
@@ -150,20 +150,20 @@ public class DeviceControlActivity extends AppCompatActivity {
         public boolean onChildClick(ExpandableListView parent, View v,
                                     int groupPosition, int childPosition, long id) {
             Log.d(TAG, "onChildClick " + groupPosition + " " + childPosition);
-//			if (mGattCharacteristics != null) {
-//				final BleGattCharacteristic characteristic = mGattCharacteristics
-//						.get(groupPosition).get(childPosition);
-//				Intent intent = new Intent(DeviceControlActivity.this,
-//						CharacteristicActivity.class);
-//				intent.putExtra("address", mDeviceAddress);
-//				Log.d(TAG, "service size " + mBle.getServices(mDeviceAddress).size());
-//				intent.putExtra("service", mBle.getServices(mDeviceAddress)
-//						.get(groupPosition).getUuid().toString());
-//				intent.putExtra("characteristic", characteristic.getUuid()
-//						.toString().toUpperCase());
-//				startActivity(intent);
-//				return true;
-//			}
+            if (mGattCharacteristics != null) {
+                final BleGattCharacteristic characteristic = mGattCharacteristics
+                        .get(groupPosition).get(childPosition);
+                Intent intent = new Intent(DeviceControlActivity.this,
+                        CharacteristicActivity.class);
+                intent.putExtra("address", mDeviceAddress);
+                Log.d(TAG, "service size " + mBle.getServices(mDeviceAddress).size());
+                intent.putExtra("service", mBle.getServices(mDeviceAddress)
+                        .get(groupPosition).getUuid().toString());
+                intent.putExtra("characteristic", characteristic.getUuid()
+                        .toString().toUpperCase());
+                startActivity(intent);
+                return true;
+            }
             return false;
         }
     };
@@ -191,6 +191,8 @@ public class DeviceControlActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         KidsWorldApplication app = (KidsWorldApplication) getApplication();
         mBle = app.getIBle();
+
+        mBle.requestConnect(mDeviceAddress);
     }
 
     @Override
@@ -256,6 +258,9 @@ public class DeviceControlActivity extends AppCompatActivity {
         });
     }
 
+    private static final String ServiceUUID = "0783b03e-8535-b5a0-7140-a304d2495cb7";
+    private static final String CharacteristicUUID = "0783b03e-8535-b5a0-7140-a304d2495cb8";
+
     // Demonstrates how to iterate through the supported GATT
     // Services/Characteristics.
     // In this sample, we populate the data structure that is bound to the
@@ -275,8 +280,14 @@ public class DeviceControlActivity extends AppCompatActivity {
 
         // Loops through available GATT Services.
         for (BleGattService gattService : gattServices) {
-            HashMap<String, String> currentServiceData = new HashMap<String, String>();
+
             uuid = gattService.getUuid().toString().toUpperCase();
+
+            if (!uuid.equals(ServiceUUID)) {
+                continue;
+            }
+
+            HashMap<String, String> currentServiceData = new HashMap<String, String>();
 
             currentServiceData.put(LIST_NAME, Utils.BLE_SERVICES
                     .containsKey(uuid) ? Utils.BLE_SERVICES.get(uuid)
@@ -294,6 +305,10 @@ public class DeviceControlActivity extends AppCompatActivity {
                 charas.add(gattCharacteristic);
                 HashMap<String, String> currentCharaData = new HashMap<String, String>();
                 uuid = gattCharacteristic.getUuid().toString().toUpperCase();
+
+                if (!uuid.equals(CharacteristicUUID)) {
+                    continue;
+                }
                 currentCharaData
                         .put(LIST_NAME,
                                 Utils.BLE_CHARACTERISTICS.containsKey(uuid) ? Utils.BLE_CHARACTERISTICS
