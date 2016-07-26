@@ -25,13 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DeviceControlActivity"></activity>
-        <activity android:name=".CharacteristicActivity"></activity>
-
-        <service
-            android:name="com.xtremeprog.sdk.ble.BleService"
-            android:enabled="true" />
-
     </application>
 
 </manifest>
