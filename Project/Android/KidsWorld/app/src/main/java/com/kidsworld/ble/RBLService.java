@@ -52,8 +52,8 @@ public class RBLService extends Service {
 	public final static String ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE";
 	public final static String EXTRA_DATA = "EXTRA_DATA";
 
-	public final static UUID UUID_BLE_SHIELD_RX = UUID
-			.fromString(RBLGattAttributes.BLE_SHIELD_RX);
+//	public final static UUID UUID_BLE_SHIELD_RX = UUID
+//			.fromString(RBLGattAttributes.BLE_SHIELD_RX);
 	public final static UUID UUID_BLE_SHIELD_RX2 = UUID
 	        .fromString(RBLGattAttributes.BLE_SHIELD_RX2);
 	public final static UUID UUID_BLE_SHIELD_SERVICE = UUID

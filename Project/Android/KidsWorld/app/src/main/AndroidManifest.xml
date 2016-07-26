@@ -27,6 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DevicesActivity"
+            android:label="@string/select_device"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
+        <service
+            android:name="com.kidsworld.ble.RBLService"
+            android:enabled="true" />
 
     </application>
 

@@ -23,27 +23,31 @@ import java.util.HashMap;
  * demonstration purposes.
  */
 public class RBLGattAttributes {
-	private static HashMap<String, String> attributes = new HashMap<String, String>();
-	public static String BLE_SHIELD_RX = "0000fff3-0000-1000-8000-00805f9b34fb";
-	public static String BLE_SHIELD_RX2 = "0000fff4-0000-1000-8000-00805f9b34fb";
-	public static String BLE_SHIELD_SERVICE = "0000fff0-0000-1000-8000-00805f9b34fb";
-	// public static String BLE_SHIELD_RX =
-	// "0000dfb1-0000-1000-8000-00805f9b34fb";
-	// public static String BLE_SHIELD_SERVICE =
-	// "0000dfb0-0000-1000-8000-00805f9b34fb";
-	// public static String BLE_SHIELD_RX2 =
-	// "0000dfb1-0000-1000-8000-00805f9b34fb";
+    private static HashMap<String, String> attributes = new HashMap<String, String>();
+//	public static String BLE_SHIELD_RX = "0000fff3-0000-1000-8000-00805f9b34fb";
+//	public static String BLE_SHIELD_RX2 = "0000fff4-0000-1000-8000-00805f9b34fb";
+//	public static String BLE_SHIELD_SERVICE = "0000fff0-0000-1000-8000-00805f9b34fb";
 
-	static {
-		// RBL Services.
-		attributes.put(BLE_SHIELD_SERVICE, "BLE Shield Service");
-		// RBL Characteristics.
-		attributes.put(BLE_SHIELD_RX, "BLE Shield RX");
-		attributes.put(BLE_SHIELD_RX2, "BLE Shield RX2");
-	}
+    public static String BLE_SHIELD_RX2 = "0783b03e-8535-b5a0-7140-a304d2495cb8";
+    public static String BLE_SHIELD_SERVICE = "0783b03e-8535-b5a0-7140-a304d2495cb7";
 
-	public static String lookup(String uuid, String defaultName) {
-		String name = attributes.get(uuid);
-		return name == null ? defaultName : name;
-	}
+    // public static String BLE_SHIELD_RX =
+    // "0000dfb1-0000-1000-8000-00805f9b34fb";
+    // public static String BLE_SHIELD_SERVICE =
+    // "0000dfb0-0000-1000-8000-00805f9b34fb";
+    // public static String BLE_SHIELD_RX2 =
+    // "0000dfb1-0000-1000-8000-00805f9b34fb";
+
+    static {
+        // RBL Services.
+        attributes.put(BLE_SHIELD_SERVICE, "BLE Shield Service");
+        // RBL Characteristics.
+//		attributes.put(BLE_SHIELD_RX, "BLE Shield RX");
+        attributes.put(BLE_SHIELD_RX2, "BLE Shield RX2");
+    }
+
+    public static String lookup(String uuid, String defaultName) {
+        String name = attributes.get(uuid);
+        return name == null ? defaultName : name;
+    }
 }

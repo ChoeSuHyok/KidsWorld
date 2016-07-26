@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2013 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,5 +16,7 @@
 <resources>
 
     <string name="app_name">Kids World</string>
+    <string name="none_found">No devices found</string>
+    <string name="select_device">select a device to connect</string>
 
 </resources>

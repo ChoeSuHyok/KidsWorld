@@ -48,6 +48,7 @@
                 android:textColor="#ffc854" />
 
             <TextView
+                android:id="@+id/txv_main_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Connected"
@@ -71,6 +72,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="3dp"
+            android:textSize="16sp"
             android:hint="Service Uuid" />
 
         <TextView
@@ -89,6 +91,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="3dp"
+            android:textSize="16sp"
             android:hint="Characteristic Uuid" />
 
         <LinearLayout
@@ -103,7 +106,8 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:paddingRight="15dp"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/btn_main_read"
@@ -124,6 +128,15 @@
             </LinearLayout>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:text="Read Data : "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
                 android:id="@+id/txv_main_communication_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,7 +144,6 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
                 android:singleLine="false"
-                android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </LinearLayout>
